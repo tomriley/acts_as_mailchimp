@@ -16,7 +16,11 @@ You will need to have an account set up at "MailChimp":http://www.mailchimp.com.
 
 h4. Hominid Gem
 
-You will also need to have the Hominid gem or plugin installed. You can install as a plugin using <code>script/plugin install git://github.com/bgetting/hominid.git</code>, or as a GemPlugin (recommended) by including the following in your **environment.rb** file:
+You will also need to have Hominid installed as a plugin:
+
+<pre><code>script/plugin install git://github.com/bgetting/hominid.git</code></pre>
+
+or as a GemPlugin (recommended) by including the following in your **environment.rb** file:
 
 <pre><code>config.gem "bgetting-hominid", :version => '~> 0.0.2', :lib => 'hominid', :source => "http://gems.github.com"</code></pre>
 
