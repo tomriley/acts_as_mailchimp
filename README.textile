@@ -8,11 +8,17 @@ Install as a plugin by typing: <code>script/plugin install git://github.com/bget
 
 h3. Prerequisites 
 
+h4. Mailchimp Account
+
 You will need to have an account set up at "MailChimp":http://www.mailchimp.com. Setting up an "account at MailChimp":http://www.mailchimp.com/tryit.phtml is free and you will not be charged until you actually send out emails.
+
+h4. Hominid Gem
 
 You will also need to have the Hominid gem or plugin installed. You can install as a plugin using <code>script/plugin install git://github.com/bgetting/hominid.git</code>, or as a GemPlugin (recommended) by including the following in your **environment.rb** file:
 
 <pre><code>config.gem "bgetting-hominid", :version => '~> 0.0.2', :lib => 'hominid', :source => "http://gems.github.com"</code></pre>
+
+h4. Required Fields
 
 "Acts_As_Mailchimp":http://github.com/bgetting/acts_as_mailchimp/tree/master expects a model with the following required fields:
 * <code>email:string</code> - The email address to add/remove from a MailChimp mailing list.
