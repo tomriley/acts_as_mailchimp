@@ -6,7 +6,9 @@ h2. Installation
 
 Install as a plugin by typing: <code>script/plugin install git://github.com/bgetting/acts_as_mailchimp.git</code>
 
-h3. Prerequisites 
+h3. Prerequisites
+
+You will need a few things to be in place before using this plugin.
 
 h4. Mailchimp Account
 
