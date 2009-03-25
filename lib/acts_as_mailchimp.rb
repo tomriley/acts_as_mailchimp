@@ -63,7 +63,7 @@ module Terra
           false
         end
         
-        def find_mailing_list(apikey, list_name)
+        def find_mailing_list(list_name)
           hominid ||= Hominid.new
           mailing_lists ||= hominid.lists
           mailing_lists.find {|list| list["name"] == list_name} unless mailing_lists.nil?
