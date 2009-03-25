@@ -1,6 +1,6 @@
 h1. "Acts_As_Mailchimp":http://github.com/bgetting/acts_as_mailchimp/tree/master
 
-This is an overhaul to the old acts_as_mailchimp plugin that requires the **Hominid gem**.
+This is an overhaul to the old acts_as_mailchimp plugin that requires the "Hominid gem":http://github.com/bgetting/hominid/tree/master.
 
 h2. Installation
 
