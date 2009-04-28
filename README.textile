@@ -81,11 +81,11 @@ h2. Examples
 
 The following controller examples illustrate how to use "acts_as_mailchimp":http://github.com/bgetting/acts_as_mailchimp/tree/master:
 
-To add a user to a mailing list called "weekly_newsletter":
+To add a user to a mailing list called _weekly\_newsletter_:
 
 <pre><code>@user.add_to_mailchimp("weekly_newsletter")</pre></code>
 
-To remove a user from a mailing list called "weekly_newsletter":
+To remove a user from a mailing list called _weekly\_newsletter_:
 
 <pre><code>@user.remove_from_mailchimp("weekly_newsletter")</pre></code>
 
