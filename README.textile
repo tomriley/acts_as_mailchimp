@@ -4,7 +4,7 @@ This is an overhaul to the old acts_as_mailchimp plugin that requires the "Homin
 
 h2. Installation
 
-Install as a plugin by typing: <code>script/plugin install git://github.com/bgetting/acts_as_mailchimp.git</code>
+Install as a plugin by typing: @script/plugin install git://github.com/bgetting/acts_as_mailchimp.git@
 
 h3. Prerequisites
 
@@ -18,21 +18,21 @@ h4. Hominid Gem
 
 You will also need to have Hominid installed as a plugin:
 
-<pre><code>script/plugin install git://github.com/bgetting/hominid.git</code></pre>
+    script/plugin install git://github.com/bgetting/hominid.git
 
 or as a GemPlugin (recommended) by including the following in your **environment.rb** file:
 
-<pre><code>config.gem "bgetting-hominid", :version => '~> 0.0.2', :lib => 'hominid', :source => "http://gems.github.com"</code></pre>
+    config.gem "bgetting-hominid", :version => '~> 0.0.2', :lib => 'hominid', :source => "http://gems.github.com"
 
 h4. Required Fields
 
 "Acts_As_Mailchimp":http://github.com/bgetting/acts_as_mailchimp/tree/master expects a model with the following required fields:
-* <code>email:string</code> - The email address to add/remove from a MailChimp mailing list.
-* <code>email_type:string</code> - Preferred email format. Must be either 'html' or 'text'.
+* @email:string@ - The email address to add/remove from a MailChimp mailing list.
+* @email_type:string@ - Preferred email format. Must be either 'html' or 'text'.
 
 Additionally, the plugin allows for the following options fields, which must be added to your list first in MailChimp:
-* <code>first_name:string</code> - The first name of the user to add/remove from a MailChimp mailing list.
-* <code>last_name:string</code> - The last name of the user to add/remove from a MailChimp mailing list.
+* @first_name:string@ - The first name of the user to add/remove from a MailChimp mailing list.
+* @last_name:string@ - The last name of the user to add/remove from a MailChimp mailing list.
 
 h3. After Installation
 
@@ -54,10 +54,10 @@ h3. Customizing
 
 You can customize the fields that the plugin accepts to make an existing model more Chimp-like. Simply pass the fields that you would like to use along with the @acts_as_mailchimp@ call in your 'User' model.
 
-<pre><code>acts_as_mailchimp :email => 'email_field',
-                  :type => 'email_type_field',
-                  :fname => 'first_name_field',
-                  :lname => 'last_name_field'</pre></code>
+    acts_as_mailchimp :email => 'email_field',
+                       :type => 'email_type_field',
+                       :fname => 'first_name_field',
+                       :lname => 'last_name_field'
 
 You only need to pass in the column names that you want to override.
 
@@ -65,15 +65,15 @@ h3. Methods
 
 Once added to a model, "acts_as_mailchimp":http://github.com/bgetting/acts_as_mailchimp/tree/master adds the following methods to model instances:
 
-<pre><code>user.add_to_mailchimp("list_name")</code></pre>
+    user.add_to_mailchimp("list_name")
 
 Add a user to a mailing list at MailChimp called *list_name*. You can set the @double_opt@ boolean to "true" in the @config/hominid.yml@ file to use the double opt-in feature at Mailchimp. If set to true, a confirmation email will be generated from MailChimp (and customizable in the MailChimp interface) that will ask the user to verify their desire to be added to the mailing list. They will need to click a verification link in order to be added to the list.
 
-<pre><code>user.remove_from_mailchimp("list_name")</code></pre>
+    user.remove_from_mailchimp("list_name")
 
 Removes a user from the specified mailing list at MailChimp.
 
-<pre><code>user.update_mailchimp("list_name", "previous_email_address")</code></pre>
+    user.update_mailchimp("list_name", "previous_email_address")
 
 Updates a user's information at MailChimp. The value for @previous_email_address@ is optional, and will default to the email address in the database for that user. The idea here is that if a user changes their email address in the Rails application, MailChimp will need to old email address in order to look up the user.
 
@@ -81,26 +81,26 @@ h2. Examples
 
 The following controller examples illustrate how to use "acts_as_mailchimp":http://github.com/bgetting/acts_as_mailchimp/tree/master:
 
-To add a user to a mailing list called _weekly\_newsletter_:
+To add a user to a mailing list called _weekly_newsletter_:
 
-<pre><code>@user.add_to_mailchimp("weekly_newsletter")</pre></code>
+    user.add_to_mailchimp("weekly_newsletter")
 
-To remove a user from a mailing list called _weekly\_newsletter_:
+To remove a user from a mailing list called _weekly _newsletter_:
 
-<pre><code>@user.remove_from_mailchimp("weekly_newsletter")</pre></code>
+    user.remove_from_mailchimp("weekly_newsletter")
 
 To update information about a user *Rails 2.1 or below*:
 
-<pre><code>previous = params[:user][:email]
-if @user.update_attributes(params[:user])
-	@user.update_mailchimp("weekly_newsletter", previous) if @user.email != previous
-end</pre></code>
+    previous = params[:user][:email]
+    if user.update_attributes(params[:user])
+    	user.update_mailchimp("weekly_newsletter", previous) if user.email != previous
+    end
 
 To update information about a user *Rails 2.1 or above*:
 
-<pre><code>if @user.update_attributes(params[:user])
-	@user.update_mailchimp("weekly_newsletter", @user.email_was) if @user.email_changed?
-end</pre></code>
+    if user.update_attributes(params[:user])
+      user.update_mailchimp("weekly_newsletter", user.email_was) if user.email_changed?
+    end
 
 Keep in mind that you these update examples do not make calls to the MailChimp API unless the user changes their email address. If you are integrating @first_name@ and @last_name@ fields as well, you will need to adjust your controller code to update MailChimp when they change either of these values as well.
 
@@ -108,24 +108,24 @@ h2. Syncing Your Rails Application
 
 You can sync your mailing list at Mailchimp with your application database using List Web Hooks. To set up a web hook for a list in Mailchimp, follow these instructions:
 
-1. Log in to your Mailchimp account.
-2. Click on the "Lists" tab.
-3. Click "view list" for the list you want to work with.
-4. Click on "list tools" at the top.
-5. Click on "web hooks" on the tools page.
+# Log in to your Mailchimp account.
+# Click on the "Lists" tab.
+# Click "view list" for the list you want to work with.
+# Click on "list tools" at the top.
+# Click on "web hooks" on the tools page.
 
 Basically, a web hook is a POST request that will be automatically sent from Mailchimp to a URL of your choice when certain events occur. You can take a look at the documentation to adjust your particular web hook, but the defaults are fine for demonstration.
 
 To start, enter the URL in your application that you want Mailchimp to send requests to:
 
-<pre><code>http://myapp.com/mailchimp?secret=123456</pre></code>
+    http://myapp.com/mailchimp?secret=123456
 
 As you can see, we also include a secret value since we want to be able to determine between a request from Mailchimp and a request from somewhere else. Remember, this URL will be exposed (even though you will keep it a secret) to the world, so requests need to be verified. In this case, we would just have something like this in the controller:
 
-<pre><code>unless params[:secret] == '123456'
-	...
-end</code></pre>
-"
+    unless params[:secret] == '123456'
+	    ...
+    end
+
 You can see the types of responses that each action will send by visiting the "Mailchimp documentation for web hooks":http://www.mailchimp.com/api/webhooks/. Currently the web hooks can be fired when the following events occur:
 
 * Subscribes
