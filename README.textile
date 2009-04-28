@@ -85,7 +85,7 @@ To add a user to a mailing list called _weekly_newsletter_:
 
     user.add_to_mailchimp("weekly_newsletter")
 
-To remove a user from a mailing list called _weekly _newsletter_:
+To remove a user from a mailing list called _weekly_newsletter_:
 
     user.remove_from_mailchimp("weekly_newsletter")
 
@@ -134,9 +134,26 @@ You can see the types of responses that each action will send by visiting the "M
 * Email address change
 * Cleaned emails
 
-You will want to account for each of these in the controller that you create to receive these POST requests. The documentation also contains sample output for each of these events.
+You will want to account for each of these in the controller that you create to receive these POST requests. Sometimes you may not have to worry about all of them, such as if your application handles all subscribes to the list, then you probably don't have to process subscribes from the web hook. Especially if your user model requires more data than is supplied by the web hook. The documentation also contains sample output for each of these events. A sample controller action might look like this:
 
-_NOTE: I will be working at some point to update the "Hominid gem":http://github.com/bgetting/hominid/tree/master so that receiving web hooks from Mailchimp will be simple and easy._
+<pre><code>def index
+  if params[:secret] == "123456"
+    case params[:type]      
+    when "unsubscribe"
+      user = User.find_by_email(params[:data][:email])
+			user.unsubscribe!
+    when "profile"
+      user = User.find_by_email(params[:data][:email])
+			user.first_name = params[:data][:merges][:FNAME]
+			user.last_name = params[:data][:merges][:LNAME]
+			user.email_type = params[:data][:email_type]
+			user.save
+    when "upemail"
+      user = User.find_by_email(params[:data][:old_email])
+			user.email = params[:data][:new_email]
+    end
+  end
+end</code></pre>
 
 h2. Updates
 

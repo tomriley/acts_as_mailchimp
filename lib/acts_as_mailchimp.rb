@@ -63,11 +63,13 @@ module Terra
           false
         end
         
+        # Find a mailing list by name
         def find_mailing_list(list_name)
           hominid ||= Hominid.new
           mailing_lists ||= hominid.lists
           mailing_lists.find {|list| list["name"] == list_name} unless mailing_lists.nil?
         end
+        
       end
     end
   end
