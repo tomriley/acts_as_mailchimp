@@ -54,12 +54,10 @@ h3. Customizing
 
 You can customize the fields that the plugin accepts to make an existing model more Chimp-like. Simply pass the fields that you would like to use along with the @acts_as_mailchimp@ call in your 'User' model.
 
-    <pre><code>
-    acts_as_mailchimp :email => 'email_field',
-                      :type => 'email_type_field',
-                      :fname => 'first_name_field',
-                      :lname => 'last_name_field'
-    </pre></code>
+<pre><code>acts_as_mailchimp :email => 'email_field',
+                  :type => 'email_type_field',
+                  :fname => 'first_name_field',
+                  :lname => 'last_name_field'</pre></code>
 
 You only need to pass in the column names that you want to override.
 
@@ -79,36 +77,32 @@ The following controller examples illustrate how to use "acts_as_mailchimp":http
 
 * To add a user to a mailing list called "weekly_newsletter":
 
-    <pre><code>
-    @user.add_to_mailchimp("weekly_newsletter")
-    </pre></code>
+<pre><code>@user.add_to_mailchimp("weekly_newsletter")</pre></code>
 
 * To remove a user from a mailing list called "weekly_newsletter":
 
-    <pre><code>
-    @user.remove_from_mailchimp("weekly_newsletter")
-    </pre></code>
+<pre><code>@user.remove_from_mailchimp("weekly_newsletter")</pre></code>
 
 * To update information about a user *Rails 2.1 or below*:
 
-    <pre><code>
-    previous = params[:user][:email]
-		if @user.update_attributes(params[:user])
-		  @user.update_mailchimp("weekly_newsletter", previous) if @user.email != previous
-		end
-    </pre></code>
+<pre><code>previous = params[:user][:email]
+if @user.update_attributes(params[:user])
+	@user.update_mailchimp("weekly_newsletter", previous) if @user.email != previous
+end</pre></code>
 
 * To update information about a user *Rails 2.1 or above*:
 
-    <pre><code>
-		if @user.update_attributes(params[:user])
-		  @user.update_mailchimp("weekly_newsletter", @user.email_was) if @user.email_changed?
-		end
-    </pre></code>
+<pre><code>if @user.update_attributes(params[:user])
+	@user.update_mailchimp("weekly_newsletter", @user.email_was) if @user.email_changed?
+end</pre></code>
 
 Keep in mind that you these update examples do not make calls to the MailChimp API unless the user changes their email address. If you are integrating @first_name@ and @last_name@ fields as well, you will need to adjust your controller code to update MailChimp when they change either of these values as well.
 
 h2. Syncing Your Rails Application
+
+Mailchimp n
+
+
 
 One of the issues with integrating a Rails application with MailChimp is keeping the mailing list at MailChimp in sync with the information in the database of your Rails application. Depending on how your Rails application works, there are a couple of options for making sure that the two systems are synced up:
 
