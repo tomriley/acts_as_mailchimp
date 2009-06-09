@@ -21,15 +21,19 @@ Basic usage for adding, removing and updating a recipient in Mailchimp is as fol
 @app/controllers/application.rb@
 
 <pre><code>def add_to_mailchimp(list_name, newsletter_email)
-  hominid ||= Hominid.new
+	hominid ||= Hominid.new
   list_id ||= hominid.lists.find {|l| l['name'] == list_name}['id']
   hominid.subscribe(list_id, newsletter_email, {}, 'html')
+rescue
+	false
 end
 
 def remove_from_mailchimp(list_name, newsletter_email)
 	hominid ||= Hominid.new
   list_id ||= hominid.lists.find {|l| l['name'] == list_name}['id']
   hominid.unsubscribe(list_id, newsletter_email)
+rescue
+	false
 end
 
 def update_mailchimp(list_name, previous_email, newsletter_email)
